@@ -1,11 +1,12 @@
-# Virus-Total-Public-API-Client-in-Java
-VirusTotal, a subsidiary of Google, is a free online service that analyzes files and URLs enabling the identification of viruses, worms, trojans and other kinds of malicious content detected by antivirus engines and website scanners. At the same time, it may be used as a means to detect false positives, i.e. innocuous resources detected as malicious by one or more scanners.
-### Sending and scanning files
-#### Example 1
-#####
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package me.vighnesh.api.virustotal.examples;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import me.vighnesh.api.virustotal.VirusTotalAPI;
 import me.vighnesh.api.virustotal.dao.FileScanMetaData;
@@ -14,12 +15,12 @@ import me.vighnesh.api.virustotal.dao.FileScanMetaData;
  *
  * @author BVR vigneshb1210@gmail.com
  */
-public class FileScanner {
+public class FileScannerWithFileInputStream {
 
-    public static void main(String[] args) throws IOException {
-        File file = new File("FILE YOU WANT TO SCAN");
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream("FILE YOU WANT TO SCAN");
         VirusTotalAPI virusTotal = VirusTotalAPI.configure("YOUR API KEY");
-        FileScanMetaData scanFile = virusTotal.scanFile(file);
+        FileScanMetaData scanFile = virusTotal.scanFile("File Name", fileInputStream);
         System.out.println("---SCAN META DATA---");
         System.out.println("");
         System.out.println("MD5 : " + scanFile.getMD5());
